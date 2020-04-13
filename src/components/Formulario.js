@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 
-const Formulario = () => {
-  // Crear de State de citas
+const Formulario = ({ crearCita }) => {
+    
+    // State de citas
     const [cita, actualizarCita] = useState({
         mascota: "",
         propietario: "",
@@ -11,10 +12,10 @@ const Formulario = () => {
         sintomas: "",
     });
 
+    // State de error
     const [error, actualizarError] = useState(false);
 
-  // Función que se ejecuta cuando un usuario escribe en un input
-
+    // Función que se ejecuta cuando un usuario escribe en un input
     const actualizarState = (e) => {
         actualizarCita({
             ...cita,
@@ -22,15 +23,14 @@ const Formulario = () => {
         });
     };
 
-  // Extraer los valores
+    // Extraer los valores
     const { mascota, propietario, fecha, hora, sintomas } = cita;
 
-  // Cuando el usuario presiona agregar cita
-
+    // Cuando el usuario presiona agregar cita
     const submitCita = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-        // Validar
+        // Validar todos los campos del formulario
         if (
             mascota.trim() === '' ||
             propietario.trim() === '' ||
@@ -42,15 +42,22 @@ const Formulario = () => {
             return;
         }
 
-        // Eliminar error
+        // Eliminar error si los campos estan llenos
         actualizarError(false);
-
+        
         // Asignar ID
         cita.id = uuid();
-        console.log(cita);
-        // Crear la cita
 
+        // Crear la cita
+        crearCita(cita);
         // Reiniciar el form
+        actualizarCita({
+            mascota: "",
+            propietario: "",
+            fecha: "",
+            hora: "",
+            sintomas: ""
+        })
     };
 
     return (
