@@ -15,11 +15,7 @@ function App() {
 
   // UseEffect para realizar ciertas operaciones cuando el state cambia
   useEffect( () => {
-    if( citasIniciales ) {
-      localStorage.setItem( 'citas', JSON.stringify(citas) );
-    } else {
-      localStorage.setItem( 'citas', JSON.stringify([]) );
-    }
+      localStorage.setItem('citas', JSON.stringify(citas));
   }, [citas]);
 
   // Funcion que toma las citas actuales y agregua la nueva
