@@ -8,8 +8,8 @@ function App() {
 
   // UseEffect para realizar ciertas operaciones cuando el state cambia
   useEffect( () => {
-    console.log('Docuemnto listo, algo paso con las citas!')
-  },[citas] );
+    
+  }, [citas]);
 
   // Funcion que toma las citas actuales y agregua la nueva
   const crearCita = cita => {
